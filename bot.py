@@ -99,7 +99,6 @@ def start_markup():
 async def start_command(client, message):
     print("Start command received!")  # Debug print
     try:
-        await message.reply_sticker("CAACAgUAAxkBAAEBVfFlnTD9i4c5DRM8K6MQN2aFFoyZuAACAwEAAvcCyFYybAIKq8ZECzQE")
         await message.reply_text(
             text=f"Hello <b>{message.from_user.first_name}</b>!\nI'm alive and ready to help.",
             reply_markup=start_markup(),
