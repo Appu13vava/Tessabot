@@ -1,11 +1,19 @@
-FROM python:3.10
-RUN apt update && apt upgrade -y
-RUN apt install git -y
-COPY requirements.txt /requirements.txt
+FROM python:3.10-slim
 
-RUN cd /
-RUN pip install -U pip && pip install -U -r requirements.txt
+# System dependencies
+RUN apt update && apt install -y git
+
+# Set working directory
 WORKDIR /app
 
+# Copy files into container
 COPY . .
-CMD ["bash", "start.sh"]
+
+# Install Python dependencies
+RUN pip install -U pip && pip install -U -r requirements.txt
+
+# Expose the port required by Koyeb
+EXPOSE 8080
+
+# Start the bot directly
+CMD ["python3", "bot.py"]
