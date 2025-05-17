@@ -22,19 +22,5 @@ yt-dlp
 cinemagoer
 
 #---others----#
-opencv-python-headless
-googletrans
-telegraph
-python-dotenv
-gTTS
-Pillow
-psutil
-NumPy
-wheel
-ujson
-wget
-pytz
-
-
 
 
