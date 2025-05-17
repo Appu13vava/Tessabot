@@ -13,7 +13,7 @@ else
 fi
 
 # Go to the project directory
-cd professorbot || exit
+cd professorbot || { echo "Failed to enter project directory"; exit 1; }
 
 # Install Python dependencies
 pip install -U -r requirements.txt --force-reinstall
