@@ -1,6 +1,8 @@
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+bot = Bot()  # Make sure this comes before the handlers
+
 # Start menu buttons
 def start_markup():
     return InlineKeyboardMarkup([
@@ -9,7 +11,7 @@ def start_markup():
     ])
 
 # /start command
-@Client.on_message(filters.command("start"))
+@bot.on_message(filters.command("start"))
 async def start_command(client, message):
     try:
         await message.reply_sticker("CAACAgUAAxkBAAEBVfFlnTD9i4c5DRM8K6MQN2aFFoyZuAACAwEAAvcCyFYybAIKq8ZECzQE")
@@ -21,8 +23,8 @@ async def start_command(client, message):
     except Exception as e:
         print(f"Error in /start: {e}")
 
-# Button handler for Help, About, and Back
-@Client.on_callback_query()
+# Callback query handler
+@bot.on_callback_query()
 async def callback_handler(client, callback_query):
     data = callback_query.data
 
