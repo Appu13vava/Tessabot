@@ -9,6 +9,8 @@ WORKDIR /app
 # Copy files into container
 COPY . .
 
+CMD ["python3", "-m", "py_compile", "bot.py"]
+
 # Install Python dependencies
 RUN pip install -U pip && pip install -U -r requirements.txt
 
