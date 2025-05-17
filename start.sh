@@ -1,23 +1,18 @@
-#!/bin/bash
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Upgrade pip (no apt!)
-pip install -U pip
+@Client.on_message(filters.command("start"))
+async def start(client, message):
+    # Send a sticker first
+    await message.reply_sticker("CAACAgUAAxkBAAEBVfFlnTD9i4c5DRM8K6MQN2aFFoyZuAACAwEAAvcCyFYybAIKq8ZECzQE")
 
-# Clone the repo to a safe path
-if [ -z "$UPSTREAM_REPO" ]; then
-  echo "Cloning main Repository"
-  git clone https://github.com/MrMKN/PROFESSOR-BOT professorbot
-else
-  echo "Cloning Custom Repo from $UPSTREAM_REPO"
-  git clone "$UPSTREAM_REPO" professorbot
-fi
-
-# Go to the project directory
-cd professorbot || { echo "Failed to enter project directory"; exit 1; }
-
-# Install Python dependencies
-pip install -U -r requirements.txt --force-reinstall
-
-# Start bot
-echo "Starting Bot....✨"
-python3 bot.py
+    # Send a welcome message with inline buttons
+    await message.reply_text(
+        text=f"Hello **{message.from_user.first_name}**!\nI'm alive and ready to help.",
+        reply_markup=InlineKeyboardMarkup(
+            [[
+                InlineKeyboardButton("Help", callback_data="help"),
+                InlineKeyboardButton("About", callback_data="about")
+            ]]
+        )
+    )
