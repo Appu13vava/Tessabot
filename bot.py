@@ -59,7 +59,7 @@ class Bot(Client):
                 disable_web_page_preview=True
             )
         except Exception as e:
-            logging.warning(f"Bot Isn't Able To Send Message To LOG_CHANNEL \n{e}")
+            logging.warning(f"Bot isn't able to send message to LOG_CHANNEL \n{e}")
 
         if bool(WEB_SUPPORT):
             app = web.Application(client_max_size=30000000)
@@ -72,11 +72,7 @@ class Bot(Client):
             runner = web.AppRunner(app)
             await runner.setup()
             await web.TCPSite(runner, "0.0.0.0", 8080).start()
-            logging.info("Web Response Is Running......🕸️")
-
-    async def stop(self, *args):
-        await super().stop()
-        logging.info("Bot Is Restarting ⟳...")
+            logging.info("Web response is running......🕸️")
 
     async def iter_messages(self, chat_id: Union[int, str], limit: int, offset: int = 0) -> Optional[AsyncGenerator["types.Message", None]]:
         current = offset
@@ -96,7 +92,9 @@ async def main():
     await bot.start()
     print("Bot is running...")
     await idle()
-    await bot.stop()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        print("Bot stopped.")
