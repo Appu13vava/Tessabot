@@ -9,7 +9,6 @@ WORKDIR /app
 # Copy files into container
 COPY . .
 
-CMD ["python3", "-m", "py_compile", "bot.py"]
 
 # Install Python dependencies
 RUN pip install -U pip && pip install -U -r requirements.txt
@@ -19,3 +18,4 @@ EXPOSE 8080
 
 # Start the bot directly
 CMD ["python3", "bot.py"]
+CMD ["python3", "-m", "py_compile", "bot.py"]
