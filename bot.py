@@ -4,9 +4,10 @@ import logging
 import datetime
 import pytz
 import logging.config
+import asyncio
 
 from aiohttp import web
-from pyrogram import Client, types
+from pyrogram import Client, types, idle
 from database.users_chats_db import db
 from database.ia_filterdb import Media
 from typing import Union, Optional, AsyncGenerator
@@ -89,4 +90,13 @@ class Bot(Client):
                 current += 1
 
 
-Bot().run()
+bot = Bot()
+
+async def main():
+    await bot.start()
+    print("Bot is running...")
+    await idle()
+    await bot.stop()
+
+if __name__ == "__main__":
+    asyncio.run(main())
